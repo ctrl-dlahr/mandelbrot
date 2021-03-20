@@ -1,6 +1,6 @@
 # Mandelbrot
 
-This generates a mandelbrot fractal as a ppm image.
+Generates a mandelbrot fractal as a ppm image.
 
 References
 - <http://paulbourke.net/dataformats/ppm/>
