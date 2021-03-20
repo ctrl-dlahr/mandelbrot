@@ -30,7 +30,7 @@ fn algorithm(x: f32, y: f32) -> f32 {
 }
 
 fn main() {
-    let file = File::create("img/mandelbrot.ppm").expect("unable to create image.ppm");
+    let file = File::create("img/mandelbrot.ppm").expect("unable to create mandelbrot.ppm");
     let mut writer = BufWriter::new(&file);
     write!(&mut writer, "P3\n{} {} 255\n", IMAGE_WIDTH, IMAGE_HEIGHT).expect("unable to write to file.");
     for x in 0..IMAGE_WIDTH {
