@@ -6,12 +6,12 @@ const IMAGE_WIDTH: i32 = 300;
 const IMAGE_HEIGHT: i32 = 300;
 
 fn draw_mandelbrot(val: f32, mut writer: impl Write) {
-    write!(writer, "{} 0 0\n", val as i32).expect("unable to write to file.");
+    write!(writer, "{} {} {}\n", val as i32, val as i32 % 10, val as i32 * 2).expect("unable to write to file.");
 }
 
 fn algorithm(x: f32, y: f32) -> f32 {
-    let dy = 1.5;
-    let dx = 0.5;
+    let dy = 0.65;
+    let dx = 1.2;
     let brightness = 15.0;
     // position (x,y)
     let position = Complex::new((x / IMAGE_WIDTH as f32) - dy, (y/IMAGE_WIDTH as f32) - dx); 
@@ -22,15 +22,11 @@ fn algorithm(x: f32, y: f32) -> f32 {
         z = z * z + position;
         fractal_shape += 0.5;
     }
-    if fractal_shape < 20.0 {
-        return (255.0 * fractal_shape) / brightness;
-    } else {
-        return 0.0
-    }
+    return (255.0 * fractal_shape) / brightness;
 }
 
 fn main() {
-    let file = File::create("img/mandelbrot.ppm").expect("unable to create mandelbrot.ppm");
+    let file = File::create("img/mandelbrot.ppm").expect("unable to create image.ppm");
     let mut writer = BufWriter::new(&file);
     write!(&mut writer, "P3\n{} {} 255\n", IMAGE_WIDTH, IMAGE_HEIGHT).expect("unable to write to file.");
     for x in 0..IMAGE_WIDTH {
